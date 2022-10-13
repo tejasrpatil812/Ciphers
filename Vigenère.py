@@ -1,17 +1,17 @@
 OUTPUT_RANGE = 127
 
-def validate_upper_case_chars(input, type):
+def validate_upper_case_string(input, type):
     for chr in input:
         if (chr < 'A' or chr > 'Z'):
             raise Exception(f"Only Upper Case Alphabet are allowed in {type}.")
 
 def validate_input(plain_text):
-    validate_upper_case_chars(plain_text, "Plain Text")
+    validate_upper_case_string(plain_text, "Plain Text")
     if not plain_text:
         raise Exception("Plain Text can't be empty.")
 
 def validate_key(key):
-    validate_upper_case_chars(key, "Key")
+    validate_upper_case_string(key, "Key")
     if not key or len(key)>3:
         raise Exception("Length of key should be in range of 1-3.")
 
