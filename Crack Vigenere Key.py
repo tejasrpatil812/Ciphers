@@ -78,7 +78,7 @@ if __name__ == "__main__":
     validate_input(plain_text, "Plain Text")
 
     cipher_text = input("Enter Cipher Text : ")
-    validate_input(cipher_text, "Cypher Text")
+    validate_input(cipher_text, "Cipher Text")
     
     generated_extended_key, generated_key = reverse_generate_key(plain_text, cipher_text)
     
