@@ -28,8 +28,8 @@ def encrypt(plain_text, key):
         Return Encrypted string with range of whole ASCII
     """
     cipher_text = ""
-    for i, text in enumerate(plain_text, 0):
-        ascii_value = (ord(text) + ord(key[i]))%OUTPUT_RANGE
+    for pt, k in zip(plain_text, key):
+        ascii_value = (ord(pt) + ord(k))%OUTPUT_RANGE
         cipher_text += chr(ascii_value)
     return cipher_text
 
