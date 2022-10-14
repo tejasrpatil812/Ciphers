@@ -1,19 +1,6 @@
-def validate_input(input, type):
-    if not input:
-        raise Exception(f"{type} can't be empty.")
-    for chr in input:
-        if (chr < 'A' or chr > 'Z'):
-            raise Exception(f"Only Upper Case Alphabet are allowed in {type}.")
-
-def write_file(file_name, data):
-    with open(f'{file_name}.txt', 'w') as file:
-        file.write(f"Total : {len(data)}\n")
-        for d in data:
-            file.write(f"{d}\n")
-
 def extend_key(key, plain_text):
     """
-        Makes Key same length as input by appending itself
+        Makes Key same length as input by appending 
     """                                  
     input_size, key_size = len(plain_text), len(key)
     times, remaining = input_size//key_size, input_size%key_size
@@ -28,6 +15,10 @@ def encrypt(plain_text, key, start = ord('A'), range = 26):
         ascii_value = start + (ord(pt) + ord(k))%range
         cipher_text += chr(ascii_value)
     return cipher_text
+
+def is_valid_key(key, plain_text, cipher_text):
+    extended_key = extend_key(key, plain_text)
+    return encrypt(plain_text, extended_key) == cipher_text
 
 def reverse_generate_key(plain_text, cipher_text):
     """
@@ -46,11 +37,7 @@ def reverse_generate_key(plain_text, cipher_text):
             keys.append(extended_key[:i])
     return extended_key, keys
     
-def is_valid_key(key, plain_text, cipher_text):
-    extended_key = extend_key(key, plain_text)
-    return encrypt(plain_text, extended_key) == cipher_text
-
-def exhaustive_search_key(plain_text, cipher_text):
+def exhaustive_key_search(plain_text, cipher_text):
     """
         Exhaustive Searches Key with length 1-3 and which
         corresponds to given Plain Text and Cipher Text
@@ -71,19 +58,3 @@ def exhaustive_search_key(plain_text, cipher_text):
         keys.extend(new_key_set)
         key_set = new_key_set
     return "", keys
-
-
-if __name__ == "__main__": 
-    plain_text = input("Enter Plain Text : ")
-    validate_input(plain_text, "Plain Text")
-
-    cipher_text = input("Enter Cipher Text : ")
-    validate_input(cipher_text, "Cipher Text")
-    
-    generated_extended_key, generated_key = reverse_generate_key(plain_text, cipher_text)
-    
-    seached_key, total_keys = exhaustive_search_key(plain_text, cipher_text)
-    write_file("generated_keys", total_keys)
-
-    print(f"Extracted Key {generated_key} out of Reverse Generated Extended Key : {generated_extended_key}")
-    print(f"Exhaustive Searched Key : {seached_key}")

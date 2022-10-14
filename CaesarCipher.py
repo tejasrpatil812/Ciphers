@@ -1,10 +1,10 @@
-
+import Validator
 alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 
 
 def encrypt(plaintext, key):
     cyphertext = ""
-    validate_text(plaintext)
+    Validator.validate_input(plaintext, "Plain Text")
         
     for c in plaintext:
         cypherIndex = (alphabet.find(c) + key) % 26
@@ -14,14 +14,3 @@ def encrypt(plaintext, key):
 
 def decrypt( cyphertext, key):
     return encrypt(cyphertext, 26 - key)
-
-def validate_text(text):
-    validate_upper_case_string(text)
-    if not text:
-        raise Exception("Plain Text can't be empty.")
-
-
-def validate_upper_case_string(input):
-    for chr in input:
-        if (chr < 'A' or chr > 'Z'):
-            raise Exception("Only Upper Case Alphabet are allowed.")
