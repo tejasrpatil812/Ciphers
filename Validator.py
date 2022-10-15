@@ -8,6 +8,14 @@ def validate_input(input, type):
     if not input:
         raise Exception(f"{type} can't be empty.")
 
+def validate_hex_input(input, type):
+    if not input:
+        raise Exception(f"{type} can't be empty.")
+    try:
+        int(input, 16)
+    except:
+        raise Exception(f"{type} should be a Valid Hex String.")
+    
 def validate_vigenere_key(key):
     validate_upper_case_string(key, "Key")
     if not key or len(key)>3:

@@ -12,9 +12,19 @@ def encrypt(plain_text, key, start = ord('A'), range = 26):
     """
     cipher_text = ""
     for pt, k in zip(plain_text, key):
-        ascii_value = start + (ord(pt) + ord(k))%range
+        ascii_value = start + (ord(pt)+ ord(k))%range
         cipher_text += chr(ascii_value)
     return cipher_text
+
+def decrypt(cipher_ascii, key, start = ord('A'), range = 26):
+    """
+        Return Decrypted string using Vigenere Cipher
+    """
+    plain_text = ""
+    for pt, k in zip(cipher_ascii, key):
+        ascii_value = start + (pt - ord(k) + range)%range
+        plain_text += chr(ascii_value)
+    return plain_text
 
 def is_valid_key(key, plain_text, cipher_text):
     extended_key = extend_key(key, plain_text)
