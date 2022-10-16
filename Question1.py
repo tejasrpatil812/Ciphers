@@ -31,12 +31,12 @@ def main():
             printMapping(key)
         elif choice == 2:
             text = input("Enter the plain text: ")
-            text = text.upper()
+            text = text.upper().replace(" ", "")
             print("\nPlain text: ", text)
             print("Cipher text: ", CaesarCipher.encrypt(text, key))
         elif choice == 3:
             text = input("Enter the cipher text: ")
-            text = text.upper()
+            text = text.upper().replace(" ", "")
             print("\nCipher text: ", text)
             print("Plain text: ", CaesarCipher.decrypt(text, key))
         elif choice ==  4:

@@ -33,11 +33,11 @@ charFrequency={'A':0.080,
 '''
 def main():
     ciphertext = input("Enter the cipher text: ")
-    decipher(ciphertext.upper())
+    decipher(ciphertext.upper().replace(" ", ""))
 
 def decipher(ciphertext):
     frequencyMap = calculateFrequency(ciphertext)
-    print("Frequency of each letter in {0} is: ". format(ciphertext))
+    print("\nFrequency of each letter in {0} is: ". format(ciphertext))
     print(frequencyMap)
 
     qMap = dict()
@@ -50,11 +50,11 @@ def decipher(ciphertext):
 
     #sort according to values
     qMap = {k: v for k, v in sorted(qMap.items(), key=lambda item: item[1],reverse=True)}
-    print("Most probable keys are (Top 5)- ")
+    print("\nMost probable keys are (Top 5)- ")
     count = 5
     for i in qMap.keys():
         count = count - 1
-        print("i = {0} q = {1}".format(i, qMap.get(i)))
+        print("\nkey = {0} q = {1}".format(i, qMap.get(i)))
         plainText = ""
         for c in ciphertext:
             cypherAlphabet = CaesarCipher.decrypt(c,i)
