@@ -8,7 +8,7 @@ def extend_key(key, plain_text):
 
 def encrypt(plain_text, key, start = ord('A'), range = 26):
     """
-        Return Encrypted string using Vigenere Cipher
+        Return Encrypted string using Vigenere Cipher for plain string
     """
     cipher_text = ""
     for pt, k in zip(plain_text, key):
@@ -16,9 +16,19 @@ def encrypt(plain_text, key, start = ord('A'), range = 26):
         cipher_text += chr(ascii_value)
     return cipher_text
 
-def decrypt(cipher_ascii, key, start = ord('A'), range = 26):
+def encrypt_ascii(plain_text, key, start = ord('A'), range = 26):
     """
-        Return Decrypted string using Vigenere Cipher
+        Return Encrypted string using Vigenere Cipher for ASCII values
+    """
+    cipher_text = ""
+    for pt, k in zip(plain_text, key):
+        ascii_value = start + (pt+ ord(k))%range
+        cipher_text += chr(ascii_value)
+    return cipher_text
+
+def decrypt_ascii(cipher_ascii, key, start = ord('A'), range = 26):
+    """
+        Return Decrypted string using Vigenere Cipher for ASCII values
     """
     plain_text = ""
     for pt, k in zip(cipher_ascii, key):
